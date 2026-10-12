@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#10172a">
+  <title>MarkWise — Student Mark Calculator</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar">
+      <a class="brand" href="#" aria-label="MarkWise home">
+        <span class="brand-mark">M</span>
+        <span><strong>MarkWise</strong><small>8085 MINI PROJECT</small></span>
+      </a>
+      <div class="side-label">WORKSPACE</div>
+      <a class="nav-item active" href="#dashboard"><span class="nav-icon">▦</span> Dashboard</a>
+      <a class="nav-item" href="#calculator"><span class="nav-icon">＋</span> Mark calculator</a>
+      <a class="nav-item" href="#assembly"><span class="nav-icon">⌘</span> 8085 assembly code</a>
+      <div class="sidebar-note">
+        <span class="note-icon">✦</span>
+        <strong>Learning mode</strong>
+        <p>Calculate marks here, then try the same inputs in GNUSim8085.</p>
+      </div>
+      <div class="side-footer"><span class="status-dot"></span> Offline-ready demo</div>
+    </aside>
+
+    <main class="main-content" id="dashboard">
+      <header class="topbar">
+        <div class="mobile-brand"><span class="brand-mark">M</span><strong>MarkWise</strong></div>
+        <div class="breadcrumb">Workspace <span>/</span> Student mark calculation</div>
+        <div class="topbar-right"><span class="chip"><span class="status-dot"></span> 8085 Lab</span><div class="avatar">S</div></div>
+      </header>
+
+      <section class="welcome">
+        <div>
+          <div class="eyebrow"><span class="spark">✦</span> MICROPROCESSOR MINI PROJECT</div>
+          <h1>Student Mark <span>Calculator</span></h1>
+          <p class="subheading">A simple, modern way to calculate total marks and average — with an 8085 assembly reference.</p>
+        </div>
+        <div class="welcome-badge"><div class="badge-symbol">Σ</div><div><strong>8085</strong><small>ASSEMBLY LAB</small></div></div>
+      </section>
+
+      <section class="stats-grid" aria-label="Project overview">
+        <article class="stat-card">
+          <div class="stat-icon violet">▤</div><div class="stat-label">Subjects</div><div class="stat-value">03 <span>inputs</span></div><div class="stat-foot">Three subject marks</div>
+        </article>
+        <article class="stat-card">
+          <div class="stat-icon cyan">∑</div><div class="stat-label">Maximum total</div><div class="stat-value">300 <span>marks</span></div><div class="stat-foot">100 marks per subject</div>
+        </article>
+        <article class="stat-card">
+          <div class="stat-icon green">％</div><div class="stat-label">Average</div><div class="stat-value">0–100<span>%</span></div><div class="stat-foot">Calculated instantly</div>
+        </article>
+      </section>
+
+      <section class="content-grid" id="calculator">
+        <article class="panel calculator-panel">
+          <div class="panel-heading">
+            <div><div class="section-kicker">CALCULATOR</div><h2>Enter student marks</h2><p>Enter a mark from 0 to 100 for each subject.</p></div>
+            <span class="live-pill"><span class="status-dot"></span> Live</span>
+          </div>
+          <form id="marksForm">
+            <div class="field-row">
+              <label class="mark-field" for="subject1"><span class="subject-number">01</span><span class="field-copy"><strong>Subject 1</strong><small>First subject</small></span><input id="subject1" name="subject1" type="number" min="0" max="100" value="70" required></label>
+              <label class="mark-field" for="subject2"><span class="subject-number">02</span><span class="field-copy"><strong>Subject 2</strong><small>Second subject</small></span><input id="subject2" name="subject2" type="number" min="0" max="100" value="80" required></label>
+              <label class="mark-field" for="subject3"><span class="subject-number">03</span><span class="field-copy"><strong>Subject 3</strong><small>Third subject</small></span><input id="subject3" name="subject3" type="number" min="0" max="100" value="90" required></label>
+            </div>
+            <div class="form-actions"><button class="button button-primary" type="submit"><span>∑</span> Calculate results</button><button class="button button-quiet" id="resetButton" type="button">Reset</button></div>
+            <p class="form-message" id="formMessage" role="status" aria-live="polite"></p>
+          </form>
+          <div class="results-area" id="resultsArea">
+            <div class="result-card result-total"><div class="result-top"><span>Total marks</span><span class="result-mini">SUM</span></div><div class="result-number" id="totalResult">240<span> / 300</span></div><div class="result-bar"><span id="totalBar" style="width:80%"></span></div></div>
+            <div class="result-card result-average"><div class="result-top"><span>Average mark</span><span class="result-mini">AVG</span></div><div class="result-number" id="averageResult">80.00<span> / 100</span></div><div class="result-bar"><span id="averageBar" style="width:80%"></span></div></div>
+          </div>
+          <div class="grade-row"><div class="grade-icon">✓</div><div><strong id="gradeTitle">Results calculated successfully</strong><p id="gradeDescription">Your average is 80%. Keep up the good work!</p></div><span class="grade-tag" id="gradeTag">GOOD</span></div>
+        </article>
+
+        <aside class="panel breakdown-panel">
+          <div class="section-kicker">PERFORMANCE</div><h2>Mark breakdown</h2><p class="panel-description">See how each subject contributes to the total.</p>
+          <div class="bar-chart" id="barChart" aria-label="Marks bar chart">
+            <div class="chart-column"><div class="chart-value" id="chartValue1">70</div><div class="chart-track"><div class="chart-fill fill-one" id="chartBar1" style="height:70%"></div></div><div class="chart-label">Subject 1</div></div>
+            <div class="chart-column"><div class="chart-value" id="chartValue2">80</div><div class="chart-track"><div class="chart-fill fill-two" id="chartBar2" style="height:80%"></div></div><div class="chart-label">Subject 2</div></div>
+            <div class="chart-column"><div class="chart-value" id="chartValue3">90</div><div class="chart-track"><div class="chart-fill fill-three" id="chartBar3" style="height:90%"></div></div><div class="chart-label">Subject 3</div></div>
+          </div>
+          <div class="chart-legend"><span><i class="legend-dot dot-one"></i>Subject 1</span><span><i class="legend-dot dot-two"></i>Subject 2</span><span><i class="legend-dot dot-three"></i>Subject 3</span></div>
+          <div class="breakdown-bottom"><div><span>Highest mark</span><strong id="highestMark">90</strong></div><div><span>Lowest mark</span><strong id="lowestMark">70</strong></div><div><span>Subjects passed</span><strong id="passedCount">3 <small>/ 3</small></strong></div></div>
+        </aside>
+      </section>
+
+      <section class="panel assembly-panel" id="assembly">
+        <div class="panel-heading assembly-heading">
+          <div><div class="section-kicker">GNUSIM8085 REFERENCE</div><h2>8085 assembly program</h2><p>Use this as a learning reference in the GNUSim8085 simulator.</p></div>
+          <button class="button button-outline" id="copyCodeButton" type="button">▣ Copy code</button>
+        </div>
+        <div class="code-toolbar"><span class="code-dot red"></span><span class="code-dot yellow"></span><span class="code-dot green-dot"></span><span class="code-filename">student_mark_calculation.asm</span><span class="language-label">8085 ASM</span></div>
+        <pre class="code-block"><code id="assemblyCode">; Student Mark Calculation - GNUSim8085
+; Input memory: 2050H, 2051H, 2052H
+; Output: total at 2053H, quotient at 2055H
+; Note: 8-bit total must be 0 to 255.
+; Marks are entered as hexadecimal values.
+
+LDA 2050H
+MOV B, A
+LDA 2051H
+ADD B
+MOV B, A
+LDA 2052H
+ADD B
+STA 2053H
+
+; Divide total by 3 using repeated subtraction
+MVI B, 03H
+MVI C, 00H
+
+LOOP: CMP B
+JC NEXT
+SUB B
+INR C
+JMP LOOP
+
+NEXT: STA 2054H
+MOV A, C
+STA 2055H
+HLT</code></pre>
+        <div class="code-note"><span class="info-icon">i</span><p><strong>Important:</strong> This simple 8-bit assembly example can store totals only up to 255. For three marks that may add up to 300, use a 16-bit total version or choose inputs whose total is 255 or less. The web calculator supports the full 0–300 range.</p></div>
+        <div class="memory-table-wrap"><h3>Memory map</h3><div class="memory-table">
+          <div class="memory-row memory-head"><span>Address</span><span>Purpose</span><span>Example</span></div>
+          <div class="memory-row"><code>2050H</code><span>Subject 1 mark</span><strong id="mem1">46H (70)</strong></div>
+          <div class="memory-row"><code>2051H</code><span>Subject 2 mark</span><strong id="mem2">50H (80)</strong></div>
+          <div class="memory-row"><code>2052H</code><span>Subject 3 mark</span><strong id="mem3">5AH (90)</strong></div>
+          <div class="memory-row"><code>2053H</code><span>Total (8-bit only)</span><strong id="memTotal">F0H (240)</strong></div>
+          <div class="memory-row"><code>2054H</code><span>Remainder</span><strong id="memRemainder">00H (0)</strong></div>
+          <div class="memory-row"><code>2055H</code><span>Integer quotient / average</span><strong id="memAverage">50H (80)</strong></div>
+        </div></div>
+      </section>
+      <footer class="footer"><span>MarkWise <span class="footer-dot">•</span> Student Mark Calculator</span><span>Built for learning 8085 microprocessor basics</span></footer>
+    </main>
+  </div>
+  <script src="script.js"></script>
+</body>
+</html>
